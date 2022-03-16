@@ -1,0 +1,332 @@
+package Atividade1;
+
+import javax.swing.JOptionPane;
+
+public class Cadastro {
+    public Boxeador cadastrarBoxeador(Boxeador novoBoxeador) {
+        
+        JOptionPane.showMessageDialog(null, "Cadastro Iniciado",1);
+        
+        novoLutador.setNomeBoxeador(JOptionPane.showInputDialog(null, "Tecle o:", "Nome do Boxeador",1));
+        novoLutador.setIdadeBoxeador(Integer.parseInt(JOptionPane.showInputDialog(null, "Tecle a:", "Idade do Boxeador",1)));
+        novoLutador.setAlturaBoxeador(Double.parseDouble(JOptionPane.showInputDialog(null, "Tecle a:", "Altura do Boxeador",1)));
+        novoLutador.setPesoBoxeador(Double.parseDouble(JOptionPane.showInputDialog(null, "Tecle o", "Peso do Boxeador",1)));
+        novoLutador.setNacionalidadeBoxeador(JOptionPane.showInputDialog(null, "Tecle a:", "Nacionalidade do Boxeador",1));
+        int opcaoCadastroNumero = Integer.parseInt(JOptionPane.showInputDialog(null, "Deseja cadastrar o número de Vitórias, Empates e Derrotas?\Z: Sim\X: Não",1));
+        
+        if (opcaoCadastroNumero == 1){
+            novoLutador.setNumeroVitorias(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite aqui:", "Número de Vitórias",1)));
+            novoLutador.setNumeroEmpates(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite aqui:", "Número de Empates",1)));
+            novoLutador.setNumeroDerrotas(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite aqui:", "Número de Derrotas",1)));
+        }
+        return novoBoxeador;
+    }
+    public static Boxeador factoryBoxeador(){
+        Lutador novoBoxeador = new Boxeador();
+        return novoBoxeador;
+    }
+    
+}
+public class Boxe {
+    //Atributos
+    private Boxeador BoxeadorDesafiante;
+    private Boxeador BoxeadorDesafiado;
+    private String dataBoxe;
+    //Construtores
+    Boxe(){}
+    Boxe(Boxeador BoxeadorDesafiante, Boxeador boxeadorDesafiado){
+        setBoxeadorDesafiado(boxeadorDesafiado);
+        setBoxeadorDesafiante(boxeadorDesafiante);
+    }
+    //Métodos Getters e Setters
+    public Lutador getBoxeadorDesafiante() {
+        return BoxeadorDesafiante;
+    }
+    public void setBoxeadorDesafiante(Boxeador boxeadorDesafiante) {
+        this.boxeadorDesafiante = boxeadorDesafiante;
+    }
+    public Boxeador getBoxeadorDesafiado() {
+        return boxeadorDesafiado;
+    }
+    public void setBoxeadorDesafiado(Lutador boxeadorDesafiado) {
+        this.boxeadorDesafiado = boxeadorDesafiado;
+    }
+    public String getDataBoxe() {
+        return dataBoxe;
+    }
+    public void setDataBoxe(String dataBoxe) {
+    this.dataBoxe = (this.BoxeadorDesafiado == this.BoxeadorDesafiante)? dataBoxe :  "Os boxeadores são iguais!";   
+    }
+    public void marcarBoxe(){
+        this.setDataBoxe(JOptionPane.showInputDialog(null, "Qual será a data do torneio?"));
+    }
+     public void Boxe(Boxeador desafiado, Boxeador desafiante){
+        JOptionPane.showMessageDialog(null, "Finalmente! "+this.getDataLuta() + "Chegou a hora do torneio");
+        this.BoxeadorDesafiante.apresentarBoxeador();
+        JOptionPane.showMessageDialog(null, "Venho dizer que "+ this.boxeadorDesafiado.getNomeBoxeador() +" está bem confiante!!");
+        this.boxeadorDesafiado.apresentarBoxeador();
+        int indexVitorioso = Integer.parseInt(JOptionPane.showInputDialog(null, "Quem foi o vencedor? Desafiante 1/Empate 0/ Desafiado 2", "Ganhador do Torneio", 1));
+        switch (indexVitorioso) {
+            case 1:
+                this.boxeadorDesafiante.ganharBoxe();
+                this.boxeadorDesafiado.perderBoxe();
+                JOptionPane.showMessageDialog(null, this.boxeadorDesafiante.getNomeBoxeador() + " foi o vitorioso, aumentando seu numero de vitórias para: " + (this.lutadorDesafiante.getNumeroVitorias()), "Fim do Combate!", 1);
+                this.lutadorDesafiante.mostrarNumeroTotal();
+                this.lutadorDesafiado.mostrarNumeroTotal();
+                break;
+            case 0:
+                this.boxeadorDesafiante.empatarLuta();
+                this.boxeadorDesafiado.empatarLuta();
+                JOptionPane.showMessageDialog(null, "Os juízes decidiram e" + this.lutadorDesafiado.getNomeLutador() + " e " + this.lutadorDesafiante.getNomeLutador() + " tiveram um...\n EMPATE", "Fim do Combate!", 1);
+                this.boxeadorDesafiante.mostrarSaldoTotal();
+                this.boxeadorDesafiado.mostrarSaldoTotal();
+                break;
+            case 2:
+                this.boxeadorDesafiado.ganharLuta();
+                this.boxeadorDesafiante.perderLuta();
+                JOptionPane.showMessageDialog(null, getBoxeadorDesafiado() + " foi o vitorioso, aumentando seu numero de vitórias para: " + (this.boxeadorDesafiado.getNumeroVitorias()), "Fim do Combate!", 1);
+                this.boxeadorDesafiante.mostrarSaldoTotal();
+                this.boxeadorDesafiado.mostrarSaldoTotal();
+                break;
+            default:
+                System.out.println("Opção Inválida!");
+                break;
+        }
+
+     }
+}
+
+public class boxeador { 
+
+    private String 
+
+        nomeboxeado, 
+
+        nacionalidadeboxeado; 
+
+    private int 
+
+        idadeboxeador, 
+
+        numVit, 
+
+        numDer, 
+
+        numEmp; 
+
+    private Double 
+
+        alturaboxeador, 
+
+        pesoboxeador; 
+
+     //Construtores 
+
+     boxeador(){} 
+
+     boxeador(String nomeboxeador, String nacionalidadeboxeador,int idadeboxeador, Double alturaboxeador, Double pesoboxeador){ 
+
+        setNomeboxeador(nomeboxeador); 
+
+        setNacionalidadeboxeador(nacionalidadeboxeador); 
+
+        setIdadeboxeador(idadeboxeador); 
+
+        setAlturaboxeador(alturaboxeador); 
+
+        setPesoboxeador(pesoboxeador); 
+
+        setNumDer(0); 
+
+        setNumEmp(0); 
+
+        setNumVit(0); 
+
+     }   
+
+     Lutador(String nomeboxeador, String nacionalidadeboxeador,int idadeboxeador, Double alturaboxeador, Double pesoboxeador, int numDer, int numEmp, int numVit){ 
+
+        setNomeboxeador (nomeboxeador); 
+
+        setNacionalidadeboxeador (nacionalidadeboxeador); 
+
+        setIdadeboxeador (idadeboxeador); 
+
+        setAlturaboxeador (alturaboxeador); 
+
+        setPesoboxeador (pesoboxeador); 
+
+        setNumDer(numDer); 
+
+        setNumEmp(numEmp); 
+
+        setNumVit(numVit); 
+
+     }   
+
+    //Métodos Getters e Setters 
+
+    public String getNomeboxeador () { 
+
+        return nomeboxeador; 
+
+    } 
+
+    public void setNomeboxeador (String nomeboxeador) { 
+
+        this.nomeboxeador = nomeboxeador; 
+
+    } 
+
+    public String getNacionalidadeboxeador () { 
+
+        return nacionalidadeboxeador; 
+
+    } 
+
+    public void setNacionalidadeboxeador (String nacionalidade boxeador) { 
+
+        this.nacionalidadeboxeador = nacionalidadeboxeador; 
+
+    } 
+
+    public int getIdadeboxeador () { 
+
+        return idadeboxeador; 
+
+    } 
+
+    public void setIdadeboxeador (int idadeboxeador) { 
+
+        this.idadeboxeador = idadeboxeador; 
+
+    } 
+
+    public int getNumVit() { 
+
+        return numVit; 
+
+    } 
+
+    public void setNumVit(int numVit) { 
+
+        this.numVit = numVit; 
+
+    } 
+
+    public int getNumDer() { 
+
+        return numDerr; 
+
+    } 
+
+    public void setNumDer(int numDer) { 
+
+        this.numDer = numDer; 
+
+    } 
+
+    public int getNumEmp() { 
+
+        return numEmp; 
+
+    } 
+
+    public void setNumEmp(int numEmp) { 
+
+        this.numEmp= numEmp; 
+
+    } 
+
+    public Double getAlturaboxeador () { 
+
+        return alturaboxeador; 
+
+    } 
+
+    public void setAlturaboxeador (Double alturaboxeador) { 
+
+        this.alturaboxeador = alturaboxeador; 
+
+    } 
+
+    public Double getPesoboxeador () { 
+
+        return pesoboxeador; 
+
+    } 
+
+    public void setPesoboxeador (Double pesoboxeador) { 
+
+        this.pesoboxeador = pesoboxeador; 
+
+    } 
+
+    public void apresentarboxeador(){ 
+
+        JOptionPane.showMessageDialog(null,"o lutador " + nomeboxeador +" pesando " +pesoboxeador+"kg e com seus impressionantes " + alturaboxeador + "m de altura, na flor de seus " + idadeboxeador + " anos de idade.\nEste "+nacionalidadeboxeador+ " já teve um saldo de "+ numDer+" Derrotas/"+ numEmp + " Empates/"+numVit+" Vitórias.", "Apresentação Lutadores", 1); 
+
+    } 
+
+    public void ganharcombate(){ 
+
+        int incremento = getNumVit()+1; 
+
+        setNumVit(incremento); 
+
+    } 
+
+    public void empcombate(){ 
+
+        int incremento = getNumEmp()+1; 
+
+        setNumEmp(incremento); 
+
+    } 
+
+    public void perdercombate(){ 
+
+        int incremento = getNumDer()+1; 
+
+        setNumDer(incremento); 
+
+    } 
+
+    public void mostrarnumeroTotal(){ 
+
+        JOptionPane.showMessageDialog(null, "V:"+getNumVit()+"\n E:"+getNumEmp()+"\n D:"+getNumDer(),"numero do boxeador - "+ getNomeboxeador (), 1); 
+
+    } 
+
+ 
+ 
+
+}
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+public class UTIC {
+    public static void main(String[] args) {
+        Cadastro controlaUTIC = new Cadastro();
+        Boxe boxeUTIC = new Boxe();
+        boolean fimCadastro = false;
+        int indexBoxeador = 0;
+        ArrayList<Boxeador> cadastroBoxeador = new ArrayList<>();
+
+        JOptionPane.showMessageDialog(null, "Seja bem-vindo a maior luta de Boxe da America Latina Elden Rigs",1);
+
+        while (fimCadastro != true) {
+          Boxeador novoBoxeador = controlaUTIC.cadastrarBoxeador(Cadastro.factoryBoxeador());
+            cadastroBoxeador.add(indexBoxeador, novoBoxeador);
+            indexBoxeador ++;
+            int  opcaoFimCadastro =Integer.parseInt(JOptionPane.showInputDialog("Continuar cadastro?\n1: Sim\n2: Não"));
+            fimCadastro = (opcaoFimCadastro==1)? false:true;
+        }
+        boxeUTIC.setBoxeadorDesafiante(cadastroBoxeador.get(0));
+        boxeUTIC.setBoxeadorDesafiado(cadastroBoxeador.get(1));
+        boxeUTIC.marcarBoxe();
+        boxeUTIC.Lutar(boxeUTIC.getBoxeadorDesafiado(), boxeUTIC.getBoxeadorDesafiante());
+    }
+    
+}
+
